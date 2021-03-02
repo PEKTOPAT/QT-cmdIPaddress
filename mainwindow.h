@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QProcess>
-#include <QNetworkInterface>
+#include <networkinterfaces.h>
 
 namespace Ui {
 class MainWindow;
@@ -19,14 +18,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
-//    QObject *parent;
-//    QString program = "C:\WINDOWS\System32\cmd.exe";
-//    QProcess *myProcess = new QProcess(parent);
-    QObject *parent;
-    QString program;
-    QStringList arguments;
-    QProcess *cmd;
-    QNetworkInterface *interfaces;
+    NetworkInterfaces *netInterfaces;
+
 };
 
 #endif // MAINWINDOW_H

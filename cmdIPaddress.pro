@@ -14,9 +14,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    networkinterfaces.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    networkinterfaces.h
 
 FORMS    += mainwindow.ui
 

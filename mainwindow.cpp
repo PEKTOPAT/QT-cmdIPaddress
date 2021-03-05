@@ -6,10 +6,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-        netInterfaces = new NetworkInterfaces;
-        netInterfaces->InfoInterfaces();
-
-        netInterfaces->SetAddress(QString Ethernet, QString 192.168.1.111, QString 255.255.255.0, QString 192.168.1.1);
+    nameInterfaces = ("Ethernet");
+    Address = ("192.168.1.66");
+    Mask = ("255.255.255.0");
+    GateWay = ("192.168.1.1");
+    netInterfaces = new NetworkInterfaces;
+    netInterfaces->InfoInterfaces();
+    netInterfaces->SetAddress(nameInterfaces, Address, Mask, GateWay);
 }
 
 MainWindow::~MainWindow()

@@ -19,6 +19,7 @@ public:
 private:
     Ui::MainWindow *ui;
     NetworkInterfaces *netInterfaces;
+    QString nameInterfaces, Address, Mask, GateWay;
 
 };
 

@@ -3,10 +3,6 @@
 //******************************************************************************
 NetworkInterfaces::NetworkInterfaces()
 {
-      //nameInterfaces.
-      Address = "192.168.1.1;
-      //Mask = "255.255.255.0";
-      GateWay = "192.168.1.1";
       Interfaces = QNetworkInterface::allInterfaces();
       parent = new QObject();
       cmd = new QProcess(parent);
@@ -31,6 +27,19 @@ QString NetworkInterfaces::InfoInterfaces()
 //----------------------------------------------------------------------------------
 void NetworkInterfaces::SetAddress(QString nameInterfaces, QString Address, QString Mask, QString GateWay)
 {
-    cmd->start(ipconfig,cmd);
+    cmd->start("cmd");
+    cmd->waitForReadyRead();
+    QByteArray result = cmd->readAll();
+    QByteArray in = "netsh interface ipv4 set address name=\"Ethernet\" static 192.168.1.100 255.255.255.0 192.168.10.1\n";
+    qDebug() << result.data();
+    cmd->write(in);
+    while(cmd->waitForReadyRead(30000))
+    {
+        result = cmd->readAll();
+        qDebug() << result.data();
+}
+
+
+
 
 }

@@ -28,8 +28,6 @@ private:
     QObject *parent;
     QList <QNetworkInterface> Interfaces;
 
-    QString nameInterfaces, Address, Mask, GateWay;
-
 //    QString program;
 //    QStringList arguments;
 public:

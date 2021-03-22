@@ -5,6 +5,7 @@
 #include <QProcess>
 #include <QDebug>
 #include <QNetworkAddressEntry>
+#include <iphlpapi.h>
 
 
 
@@ -19,13 +20,14 @@ public slots:
 protected:
 
 private slots:
-
+    QString osVersion();
 
 private:
 
     QProcess *cmd;
     QNetworkInterface *interface;
     QObject *parent;
+    //MIB_IFROW *pIfRow;
     QList <QNetworkInterface> Interfaces;
 
 //    QString program;

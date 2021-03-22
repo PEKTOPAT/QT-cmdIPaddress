@@ -24,6 +24,7 @@ private slots:
 private:
 
     QProcess *cmd;
+    QProcess *fly_term;
     QNetworkInterface *interface;
     QObject *parent;
     QList <QNetworkInterface> Interfaces;

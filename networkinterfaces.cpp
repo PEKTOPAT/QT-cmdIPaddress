@@ -1,4 +1,6 @@
 //******************************************************************************
+#include <winsock2.h>
+#include <iphlpapi.h>
 #include "networkinterfaces.h"
 //******************************************************************************
 NetworkInterfaces::NetworkInterfaces()
@@ -6,14 +8,13 @@ NetworkInterfaces::NetworkInterfaces()
     Interfaces = QNetworkInterface::allInterfaces();
     parent = new QObject();
     cmd = new QProcess(parent);
-    //pIfRow = new MIB_IFROW();
-    //qDebug() << Interfaces;
+    //qDebug() << Interfaces[0].index();
     //qDebug() << IfRow->dwIndex;
 
 
 }
 //----------------------------------------------------------------------------------
-//***--------Функция получения  информации о интерфейсе--------***
+//***---------------Функция получения  информации о интерфейсе-------------------***
 //----------------------------------------------------------------------------------
 QString NetworkInterfaces::InfoInterfaces()
 {  
@@ -29,26 +30,39 @@ QString NetworkInterfaces::InfoInterfaces()
 //----------------------------------------------------------------------------------
 void NetworkInterfaces::SetAddress(QString nameInterfaces, QString Address, QString Mask, QString GateWay)
 {
+    MIB_IFROW IfRow;
 #if defined(Q_OS_LINUX)
     qDebug() << "LINUX";
-//    qDebug() << "Состояние до start" <<fly_term->state();
-//        QByteArray command = "sudo su";
-//        fly_term->start(command, QIODevice::ReadWrite);
-//        fly_term->waitForStarted();
-//        qDebug() << "Состояние после start" <<fly_term->state();
-//        command = "echo \"auto lo\niface lo inet loopback\nauto eth0\niface eth0 inet static\n"
-//                  "address 192.168.6.71\n"
-//                  "gateway 192.168.6.1\n"
-//                  "netmask 255.255.255.0\n"
-//                  "network 192.168.6.0\n"
-//                  "broadcast 192.168.6.255\n\" > /etc/network/interfaces; "
-//                  "sudo ip addr flush eth0; "
-//                  "sudo ifdown -a;"
-//                  "sudo ifup -a";
-//        fly_term->write(command);
-//        fly_term->closeWriteChannel();
+    //    qDebug() << "Состояние до start" <<fly_term->state();
+    //        QByteArray command = "sudo su";
+    //        fly_term->start(command, QIODevice::ReadWrite);
+    //        fly_term->waitForStarted();
+    //        qDebug() << "Состояние после start" <<fly_term->state();
+    //        command = "echo \"auto lo\niface lo inet loopback\nauto eth0\niface eth0 inet static\n"
+    //                  "address 192.168.6.71\n"
+    //                  "gateway 192.168.6.1\n"
+    //                  "netmask 255.255.255.0\n"
+    //                  "network 192.168.6.0\n"
+    //                  "broadcast 192.168.6.255\n\" > /etc/network/interfaces; "
+    //                  "sudo ip addr flush eth0; "
+    //                  "sudo ifdown -a;"
+    //                  "sudo ifup -a";
+    //        fly_term->write(command);
+    //        fly_term->closeWriteChannel();
 #elif defined(Q_OS_WIN)
-    qDebug() << "WIN";
+    qDebug() << "\t\tWINDOWS Network devices:";
+    for(int i = 0; i < Interfaces.size(); i++)
+    {
+        IfRow.dwIndex = Interfaces[i].index();
+        if (GetIfEntry(&IfRow) != NO_ERROR) qDebug() << "ERROR";
+        if(IfRow.dwType == IF_TYPE_ETHERNET_CSMACD)
+        {
+            qDebug() << Interfaces[i].humanReadableName();
+        }
+
+
+    }
+
     //    qDebug() << "Sostoianie1" <<  cmd->state();
     //    cmd->start("cmd");
     //    qDebug() << "Sostoianie2" <<  cmd->state();
@@ -63,7 +77,7 @@ void NetworkInterfaces::SetAddress(QString nameInterfaces, QString Address, QStr
     //        qDebug() << result.data();
     //    }
 #else
-   qDebug() << "Undefined";
+    qDebug() << "Undefined";
 #endif
 }
 

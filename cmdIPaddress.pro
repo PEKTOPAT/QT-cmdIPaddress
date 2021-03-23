@@ -24,3 +24,6 @@ FORMS    += mainwindow.ui
 
 CONFIG += console
 
+LIBS += -lIphlpapi
+
+

@@ -1,5 +1,3 @@
-#include <winsock2.h>
-#include <iphlpapi.h>
 #include "mainwindow.h"
 #include <QApplication>
 

@@ -15,7 +15,7 @@ public:
     NetworkInterfaces();
 
 public slots:
-    QString InfoInterfaces();
+    QStringList InfoInterfaces();
     void SetAddress(QString nameInterfaces, QString Address, QString Mask, QString GateWay);
 protected:
 
@@ -24,13 +24,12 @@ private slots:
 
 private:
 
-    QProcess *cmd;
-    QNetworkInterface *pinterface;
+    QProcess *cmdWIN;
+    QProcess *cmdUNIX;
     QObject *parent;
+    QNetworkInterface::InterfaceType InterfaceType;
     QList <QNetworkInterface> Interfaces;
-
-//    QString program;
-//    QStringList arguments;
+    QStringList ListEthInterfaces;
 public:
 
 };

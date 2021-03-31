@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     netInterfaces = new NetworkInterfaces;
-    nameInterfaces = (netInterfaces->InfoInterfaces())[0];
-    qDebug() << nameInterfaces;
+    nameInterfaces = (netInterfaces->InfoInterfaces())[2];
+    qDebug() << "Use interfaces:" << nameInterfaces;
     netInterfaces->SetAddress(nameInterfaces, Address, Mask, GateWay);
 }
 

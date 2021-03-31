@@ -24,10 +24,8 @@ private slots:
 
 private:
 
-    QProcess *cmdWIN;
-    QProcess *cmdUNIX;
+    QProcess *cmd;
     QObject *parent;
-    QNetworkInterface::InterfaceType InterfaceType;
     QList <QNetworkInterface> Interfaces;
     QStringList ListEthInterfaces;
 public:

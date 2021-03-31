@@ -24,5 +24,5 @@ FORMS    += mainwindow.ui
 
 CONFIG += console
 
-win {LIBS += -lIphlpapi}
+LIBS += -lIphlpapi
 
